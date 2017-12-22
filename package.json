@@ -1,8 +1,8 @@
 {
-  "name": "electron",
+  "name": "notebook",
   "version": "0.0.0",
   "author": "Andrey Zimin (luummii) <luummii@vuejs.fun>",
-  "description": "An electron-vue project",
+  "description": "The notebook is desktop app for notes",
   "license": null,
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "electron",
+    "productName": "notebook",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"
