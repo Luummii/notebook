@@ -1,10 +1,14 @@
 {
   "name": "notebook",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Andrey Zimin (luummii) <luummii@vuejs.fun>",
   "description": "The notebook is desktop app for notes",
-  "license": null,
+  "license": "MIT License",
   "main": "./dist/electron/main.js",
+  "bugs": {
+    "url": "https://github.com/Luummii/notebook/issues"
+  },
+  "homepage": "https://github.com/Luummii/notebook/blob/master/README.md",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
     "build:dir": "node .electron-vue/build.js && electron-builder --dir",
@@ -14,7 +18,8 @@
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
-    "postinstall": ""
+    "postinstall": "",
+    "test": "node spec/index.js"
   },
   "build": {
     "productName": "notebook",
@@ -73,12 +78,16 @@
     "del": "^3.0.0",
     "devtron": "^1.4.0",
     "electron": "^1.7.5",
+    "electron-builder": "^19.19.1",
     "electron-debug": "^1.4.0",
     "electron-devtools-installer": "^2.2.0",
-    "electron-builder": "^19.19.1",
+    "eslint": "^4.13.1",
+    "eslint-plugin-jasmine": "^2.9.1",
+    "eslint-plugin-vue": "^4.0.0-beta.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",
+    "jasmine": "^2.8.0",
     "multispinner": "^0.2.1",
     "node-loader": "^0.6.0",
     "style-loader": "^0.18.2",

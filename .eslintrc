@@ -1,0 +1,12 @@
+{
+  "extends": ["plugin:vue/essential"],
+  "env":{
+    "jasmine": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "plugins": ["jasmine"]
+}
