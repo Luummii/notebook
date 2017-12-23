@@ -1,23 +1,9 @@
-'use strict'
-
 import { app, BrowserWindow, Menu } from 'electron'
 
-const template = [
-  {
-    label: 'Filter',
-    submenu: [
-      {
-        label: 'Hello',
-        accelerator: 'Shift+CmdOrCtrl+H',
-        click () {
-          console.log('Oh, hi there!')
-        }
-      }
-    ]
-  }
-]
-const menu = Menu.buildFromTemplate(template)
-
+/**
+ * Set `__static` path to static files in production
+ * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
+ */
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
@@ -28,6 +14,7 @@ const winURL = process.env.NODE_ENV === 'development'
   : `file://${__dirname}/index.html`
 
 function createWindow () {
+
   mainWindow = new BrowserWindow({
     height: 563,
     useContentSize: true,
@@ -36,11 +23,27 @@ function createWindow () {
 
   mainWindow.loadURL(winURL)
 
+  const template = [
+    {
+      label: 'Filter',
+      submenu: [
+        {
+          label: 'Hello',
+          accelerator: 'Shift+CmdOrCtrl+H',
+          click () {
+            console.log('Oh, hi there!')
+          }
+        }
+      ]
+    }
+  ]
+
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+
   mainWindow.on('closed', () => {
     mainWindow = null
   })
-
-  Menu.setApplicationMenu(menu)
 }
 
 app.on('ready', createWindow)
@@ -56,3 +59,23 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+/**
+ * Auto Updater
+ *
+ * Uncomment the following code below and install `electron-updater` to
+ * support auto updating. Code Signing with a valid certificate is required.
+ * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
+ */
+
+/*
+import { autoUpdater } from 'electron-updater'
+
+autoUpdater.on('update-downloaded', () => {
+  autoUpdater.quitAndInstall()
+})
+
+app.on('ready', () => {
+  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
+})
+ */
