@@ -78,8 +78,11 @@ function pack (config) {
         let err = ''
 
         stats.toString({
+          colors: true,
+          modules: false,
+          children: false,
           chunks: false,
-          colors: true
+          chunkModules: false
         })
         .split(/\r?\n/)
         .forEach(line => {
