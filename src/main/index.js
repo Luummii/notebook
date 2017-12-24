@@ -1,4 +1,5 @@
-import { app, BrowserWindow, Menu } from 'electron'
+import { app, BrowserWindow } from 'electron'
+import { autoUpdater } from 'electron-updater'
 
 /**
  * Set `__static` path to static files in production
@@ -16,30 +17,14 @@ const winURL = process.env.NODE_ENV === 'development'
 function createWindow () {
 
   mainWindow = new BrowserWindow({
-    height: 563,
+    minHeight: 800,
+    minWidth: 1600,
     useContentSize: true,
-    width: 1000
   })
 
   mainWindow.loadURL(winURL)
 
-  const template = [
-    {
-      label: 'Filter',
-      submenu: [
-        {
-          label: 'Hello',
-          accelerator: 'Shift+CmdOrCtrl+H',
-          click () {
-            console.log('Oh, hi there!')
-          }
-        }
-      ]
-    }
-  ]
-
-  const menu = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(menu)
+  mainWindow.setMenu(null)
 
   mainWindow.on('closed', () => {
     mainWindow = null
@@ -60,17 +45,6 @@ app.on('activate', () => {
   }
 })
 
-/**
- * Auto Updater
- *
- * Uncomment the following code below and install `electron-updater` to
- * support auto updating. Code Signing with a valid certificate is required.
- * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
- */
-
-/*
-import { autoUpdater } from 'electron-updater'
-
 autoUpdater.on('update-downloaded', () => {
   autoUpdater.quitAndInstall()
 })
@@ -78,4 +52,4 @@ autoUpdater.on('update-downloaded', () => {
 app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })
- */
+
