@@ -2,21 +2,24 @@
   <div class="home">
     <div class="content"></div>
     <div class="sidebar">
-      <event-calendar></event-calendar>
+      <vue-event-calendar :events="dateEvents"></vue-event-calendar>
     </div>    
   </div>
 </template>
 
 <script>
-import Calendar from '../components/Calendar.vue'
 export default {
   name: 'Home',
-  components: {
-    'event-calendar': Calendar
-  },
   data () {
     return {
-      
+      dateEvents: [{
+        date: '2017/11/12'
+      }, {
+        date: '2017/12/15',
+        title: 'Bar',
+        desc: 'description',
+        customClass: 'disabled highlight' // Custom classes to an calendar cell
+      }]
     }
   }
 }
