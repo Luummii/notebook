@@ -1,8 +1,6 @@
 <template lang="html">
   <div class="top-menu">
-    <div class="logo">
-      
-    </div>     
+    <div class="logo"></div>     
     <nav>
       <ul>
         <li><a href="#intro">Welcome</a></li>
@@ -66,7 +64,7 @@ export default {
 
         a 
           border 0
-          color #4E4369
+          color $bold-color
           display inline-block
           font-size: 0.44em
           font-weight bold
