@@ -1,5 +1,8 @@
 <template lang="html">
   <div class="top-menu">
+    <div class="logo">
+      
+    </div>     
     <nav>
       <ul>
         <li><a href="#intro">Welcome</a></li>
@@ -23,17 +26,33 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../assets/stylus/lib/vars'
+
 .top-menu
   position fixed
   top 0
   left 0
   right 0
   height 52px
-  background-color #291E45
+  background-color $bg
   box-shadow: 0 8px 4px -4px rgba(0, 0, 0, .2)
+
+  .logo
+    width 20px
+    height 20px
+    position relative
+    float left
+    margin-left 10px
+    margin-top 15px
+    vertical-align middle
+    background no-repeat center center
+    background-size cover
+    background-image url('../assets/img/logo.png')
+
 
   nav
     text-align left
+    margin-left 40px
 
     ul
       margin 0
@@ -41,7 +60,7 @@ export default {
 
       li
         display inline-block
-        margin-left 0.75em
+        margin-left 0.15em
         padding 0
         vertical-align middle
 
@@ -51,12 +70,12 @@ export default {
           display inline-block
           font-size: 0.44em
           font-weight bold
-          letter-spacing 0.2em
           text-transform uppercase
           text-decoration none
+          transition-duration .5s
 
           &:hover 
-            color #897EA4         
+            color $hover         
 
           &.active 
             color #ffffff				

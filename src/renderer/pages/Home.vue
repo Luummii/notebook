@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    TEST TEXT
+    
   </div>
 </template>
 

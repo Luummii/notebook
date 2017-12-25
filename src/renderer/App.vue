@@ -16,7 +16,8 @@ export default {
 </script>
 
 <style lang="stylus">
-@import './assets/lib/normalize'
+@import './assets/stylus/lib/normalize'
+@import './assets/stylus/lib/vars'
 
 @font-face
   font-family 'Ubuntu-Bold'
