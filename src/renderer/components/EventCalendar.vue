@@ -60,6 +60,7 @@ export default {
     background-color $second-color
     overflow hidden
     color white
+    border-radius 10px 10px 0 0
     &>div
       float left
       line-height 10px
@@ -132,6 +133,7 @@ export default {
     text-align center
     background $second-color
     color white
+    border-radius 0 0 10px 10px
     .item
       position relative
       float left

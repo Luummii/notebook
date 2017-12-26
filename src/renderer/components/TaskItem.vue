@@ -24,6 +24,7 @@ export default {
 .task-item
   margin 7px 10px
   border 1px solid #BDBDBD
+  border-radius 10px
   padding 5px 10px
 
 

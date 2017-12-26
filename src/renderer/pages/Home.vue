@@ -1,7 +1,11 @@
 <template>
   <div class="home">
     <div class="content">
-      <task-item v-for="item in 30" :id="item" :key="item"></task-item>
+      <draggable v-model="myArray">
+        <transition-group name="list-complete">
+          <task-item v-for="item in 30" :id="item" :key="item"></task-item>
+        </transition-group>
+      </draggable>
     </div>
     <div class="sidebar">
       <event-calendar></event-calendar>
@@ -12,11 +16,12 @@
 <script>
 import EventCalendar from '../components/EventCalendar.vue'
 import TaskItem from '../components/TaskItem.vue'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'Home',
   components: {
-    EventCalendar, TaskItem
+    EventCalendar, TaskItem, draggable
   },
   data () {
     return {
