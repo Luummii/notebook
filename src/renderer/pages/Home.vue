@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <div class="content">
-      <draggable v-model="myArray">
-        <transition-group name="list-complete">
-          <task-item v-for="item in 30" :id="item" :key="item"></task-item>
+      <draggable v-model="tasks" :options="{ animation: 200 }" :no-transition-on-drag="true" @start="drag=true" @end="drag=false">
+        <transition-group :name="!drag ? 'list-complete' : null" :css="true">
+          <task-item v-for="item in tasks" :id="item" :key="item"></task-item>
         </transition-group>
       </draggable>
     </div>
@@ -25,7 +25,8 @@ export default {
   },
   data () {
     return {
-      
+      drag: false,
+      tasks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18]
     }
   }
 }
@@ -37,11 +38,9 @@ export default {
 
   .content
     float left
-    width 76%
-    overflow auto
+    width 75%
   
   .sidebar
     float right
     width 24%
-    overflow auto
 </style>

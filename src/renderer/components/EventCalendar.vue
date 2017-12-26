@@ -154,6 +154,7 @@ export default {
         z-index 2
         margin-left -7px
         margin-top 10px
+        cursor pointer
 
       .is-today
         content ''
@@ -168,4 +169,5 @@ export default {
         z-index 1
         margin-left -18px
         margin-top -19px
+        cursor pointer
 </style>
