@@ -65,7 +65,7 @@ export default {
     height 19px
     margin -1px 4px 0 0
     vertical-align middle
-    background url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) left top no-repeat;
+    background url(../assets/img/check_radio_sheet.png) left top no-repeat;
     cursor pointer
 
   input[type="checkbox"] 
@@ -77,11 +77,11 @@ export default {
     height 19px
     margin -1px 4px 0 0
     vertical-align middle
-    background url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) left top no-repeat
+    background url(../assets/img/check_radio_sheet.png) left top no-repeat
     cursor pointer
   
   input[type="checkbox"]:checked + label span 
-    background url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat
+    background url(../assets/img/check_radio_sheet.png) -19px top no-repeat
   
   
   
