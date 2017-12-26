@@ -51,6 +51,7 @@ export default {
 * 
   box-sizing border-box
 .calendar
+  position fixed
   margin-top 7px
   margin-right 5px
   .month 

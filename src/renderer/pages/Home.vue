@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <div class="content"></div>
+    <div class="content">
+      <task-item v-for="item in 30" :id="item" :key="item"></task-item>
+    </div>
     <div class="sidebar">
       <event-calendar></event-calendar>
     </div>    
@@ -9,10 +11,12 @@
 
 <script>
 import EventCalendar from '../components/EventCalendar.vue'
+import TaskItem from '../components/TaskItem.vue'
+
 export default {
   name: 'Home',
   components: {
-    EventCalendar
+    EventCalendar, TaskItem
   },
   data () {
     return {

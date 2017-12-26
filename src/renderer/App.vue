@@ -18,14 +18,13 @@ export default {
 <style lang="stylus">
 @import './assets/stylus/lib/normalize'
 @import './assets/stylus/lib/vars'
-
-@font-face
-  font-family 'Ubuntu-Bold'
-  src url('./assets/fonts/Ubuntu-Bold.woff2') format('woff2')
-  font-weight bold
-  font-style normal  
+@import url('https://fonts.googleapis.com/css?family=Ubuntu')
 
 body
-  font-family Ubuntu-Bold
+  font-family Ubuntu
   font-size 30px
+
+  &::-webkit-scrollbar 
+    width: 0  
+    background: transparent
 </style>
