@@ -15,7 +15,7 @@
           {{i18n[calendar.options.locale].dayNames[(dayIndex + calendar.options.weekStartOn) % 7]}}
         </span>
       </div>
-      <div class="dates" >
+      <div class="dates">
         <div v-for="date in dayList" class="item"
           :class="[{
             today: date.status ? (today == date.date) : false,
@@ -39,7 +39,7 @@
 
 <script>
 import i18n from '../i18n.js'
-import { dateTimeFormatter, isEqualDateStr} from '../tools.js'
+import { dateTimeFormatter, isEqualDateStr } from '../tools.js'
 
 export default {
   name: 'cal-panel',

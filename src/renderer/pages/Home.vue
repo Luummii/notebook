@@ -2,24 +2,21 @@
   <div class="home">
     <div class="content"></div>
     <div class="sidebar">
-      <vue-event-calendar :events="dateEvents"></vue-event-calendar>
+      <event-calendar></event-calendar>
     </div>    
   </div>
 </template>
 
 <script>
+import EventCalendar from '../components/EventCalendar.vue'
 export default {
   name: 'Home',
+  components: {
+    EventCalendar
+  },
   data () {
     return {
-      dateEvents: [{
-        date: '2017/11/12'
-      }, {
-        date: '2017/12/15',
-        title: 'Bar',
-        desc: 'description',
-        customClass: 'disabled highlight' // Custom classes to an calendar cell
-      }]
+      
     }
   }
 }
@@ -31,11 +28,11 @@ export default {
 
   .content
     float left
-    width 82%
+    width 76%
     overflow auto
   
   .sidebar
     float right
-    width 18%
+    width 24%
     overflow auto
 </style>

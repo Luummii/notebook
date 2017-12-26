@@ -5,8 +5,9 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-import install from './components/calendar/index'
-install(Vue, { locale: 'ru' })
+/* import eventCalendar from './components/calendar/index'
+eventCalendar(Vue, { locale: 'en' }) */
+
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false

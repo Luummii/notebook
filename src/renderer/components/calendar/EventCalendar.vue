@@ -133,7 +133,7 @@ export default {
 <style lang="stylus">
 
 $base-orange = #f29543
-$white = #ffffff
+$bg = #00A8E8
 $gray = #e0e0e0
 $gray-dark = #b1b1b1
 $large-padding = 15px
@@ -143,6 +143,7 @@ $icon-border-size = 1px
 .__vev_calendar-wrapper
   position relative
   overflow hidden
+  margin-top 4px
   width 100%
   *
     box-sizing border-box
@@ -151,8 +152,7 @@ $icon-border-size = 1px
     .cal-header
       position relative
       width 100%
-      background-color $white
-      box-shadow 0 6px 5px rgba(0,0,0,.1)
+      background-color $bg
       font-weight 500
       overflow hidden
       padding-bottom 10px
