@@ -3,10 +3,9 @@
     <div class="logo"></div>     
     <nav>
       <ul>
-        <li><a href="#intro">Welcome</a></li>
-        <li><a href="#one">Who we are</a></li>
-        <li><a href="#two">What we do</a></li>
-        <li><a href="#three">Get in touch</a></li>
+        <li><router-link tag="a" to="/Home">Tasks</router-link></li>
+        <li><router-link tag="a" to="/Notes">Notes</router-link></li>
+        <li><router-link tag="a" to="/Options">Options</router-link></li>
       </ul>
     </nav>
   </div>

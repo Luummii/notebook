@@ -2,7 +2,7 @@
   <div class="task-item">    
     <div class="task-content">
       <p class="data">23.05.1979</p>
-      <p class="task-title">TASK {{ id }}</p>
+      <p class="task-title" @click="goToPath(id)">TASK {{ id }}</p>
       <p class="task-description">Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
                                   Adipisicing aliquip id nulla id nisi qui ad adipisicing...</p>
     </div>

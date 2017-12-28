@@ -3,7 +3,7 @@
     <div class="content">
       <draggable v-model="tasks" :options="{ animation: 200 }" :no-transition-on-drag="true" @start="drag=true" @end="drag=false">
         <transition-group :name="!drag ? 'list-complete' : null" :css="true">
-          <task-item v-for="item in tasks" :id="item" :key="item"></task-item>
+          <task-item-list v-for="item in tasks" :id="item" :key="item"></task-item-list>
         </transition-group>
       </draggable>
     </div>
@@ -15,13 +15,13 @@
 
 <script>
 import EventCalendar from '../components/EventCalendar.vue'
-import TaskItem from '../components/TaskItem.vue'
+import TaskItemList from '../components/TaskItemList.vue'
 import draggable from 'vuedraggable'
 
 export default {
   name: 'Home',
   components: {
-    EventCalendar, TaskItem, draggable
+    EventCalendar, TaskItemList, draggable
   },
   data () {
     return {

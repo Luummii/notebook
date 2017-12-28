@@ -12,6 +12,15 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
+Vue.mixin({
+  methods: {
+    goToPath (id) {
+      console.log(id)
+      router.push({ path: '/Task/' + id })         
+    }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   components: { App },
