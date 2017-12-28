@@ -19,7 +19,9 @@ export default {
 @import './assets/stylus/lib/normalize'
 @import './assets/stylus/lib/vars'
 @import url('https://fonts.googleapis.com/css?family=Ubuntu')
-
+* 
+  box-sizing border-box
+  
 body
   font-family Ubuntu
   font-size 30px

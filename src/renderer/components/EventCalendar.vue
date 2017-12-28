@@ -8,13 +8,11 @@
       </div>
       <div class="right"><div class="arrow-right icon"></div></div>
     </div>
-
     <div class="weekdays">
       <span v-for="(day, index) in days" :class="weekClass(day)" :key="index">
         {{ day }}
       </span>
     </div>
-
     <div class="days">  
       <div v-for="day in 31" class="item">
         <p class="date-num">{{ day }}</p>
@@ -48,8 +46,6 @@ export default {
 
 <style lang="stylus" scoped>
 @import '../assets/stylus/lib/vars'
-* 
-  box-sizing border-box
 .calendar
   position fixed
   margin-top 7px
@@ -59,7 +55,7 @@ export default {
     width 100%
     background-color $second-color
     overflow hidden
-    color white
+    color $button-color
     border-radius 10px 10px 0 0
     &>div
       float left
@@ -78,7 +74,7 @@ export default {
       width 20%
       cursor pointer
     .arrow-left.icon 
-      color #000
+      color $button-color
       position absolute
       left 6%
       margin-top 10px  
@@ -89,11 +85,11 @@ export default {
       top -5px
       width 10px
       height 10px
-      border-top solid 1px white
-      border-right solid 1px white
+      border-top solid 1px $button-color
+      border-right solid 1px $button-color
       transform rotate(-135deg)
     .arrow-right.icon 
-      color #000
+      color $button-color
       position absolute
       right 6%
       margin-top 10px  
@@ -104,8 +100,8 @@ export default {
       top -5px
       width 10px
       height 10px
-      border-top solid 1px white
-      border-right solid 1px white
+      border-top solid 1px $button-color
+      border-right solid 1px $button-color
       transform rotate(45deg)
     .year    
       font-size 9px
@@ -118,7 +114,7 @@ export default {
     width 100%
     overflow hidden
     text-align center
-    color white
+    color $button-color
     .item, .weekend
       line-height 30px
       float left
@@ -132,7 +128,7 @@ export default {
     overflow hidden
     text-align center
     background $second-color
-    color white
+    color $button-color
     border-radius 0 0 10px 10px
     .item
       position relative
@@ -143,7 +139,9 @@ export default {
         cursor pointer
         font-size 16px
         position relative
-
+        transition-duration .3s
+      &:hover 
+        color $hover-color
       .is-busy
         content ''
         width 14px
@@ -155,7 +153,6 @@ export default {
         margin-left -7px
         margin-top 10px
         cursor pointer
-
       .is-today
         content ''
         border 1px solid #00B5AC

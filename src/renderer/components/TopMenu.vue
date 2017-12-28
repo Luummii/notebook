@@ -47,34 +47,28 @@ export default {
     background-size cover
     background-image url('../assets/img/logo.png')
 
-
   nav
     text-align left
     margin-left 40px
-
     ul
       margin 0
       padding 0
-
       li
         display inline-block
         margin-left 0.15em
         padding 0
         vertical-align middle
-
         a 
           border 0
-          color $bold-color
+          color $button-color
           display inline-block
           font-size: 0.44em
           font-weight bold
           text-transform uppercase
           text-decoration none
-          transition-duration .5s
-
+          transition-duration .3s
           &:hover 
-            color $hover         
-
+            color $hover-color
           &.active 
-            color #ffffff				
+            color $active-color				
 </style>
