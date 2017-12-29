@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div class="cal-wrapper">
     <div class="cal-header">
       <div class="l" @click="preMonth"><div class="arrow-left icon"></div></div>

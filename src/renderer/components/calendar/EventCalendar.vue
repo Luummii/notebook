@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div class="__vev_calendar-wrapper">
     <cal-panel
       :events="events"

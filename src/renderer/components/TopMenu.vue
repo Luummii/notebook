@@ -26,7 +26,6 @@ export default {
 
 <style lang="stylus">
 @import '../assets/stylus/lib/vars'
-
 .top-menu
   position fixed
   top 0

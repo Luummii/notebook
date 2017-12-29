@@ -2,9 +2,9 @@
   <div class="task-item">    
     <div class="task-content">
       <p class="data">23.05.1979</p>
-      <p class="task-title" @click="goToPath(id)">TASK {{ id }}</p>
-      <p class="task-description">Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
-                                  Adipisicing aliquip id nulla id nisi qui ad adipisicing...</p>
+      <p class="task-description" @click="goToPath(id)">Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
+                                  Adipisicing aliquip id nulla id nisi qui ad adipisicing. Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
+                                  Adipisicing aliquip id nulla id ... </p>
     </div>
     <div class="task-options">      
       <input type="checkbox" :id="id" name="cc" />
@@ -30,26 +30,22 @@ export default {
 <style lang="stylus">
 @import '../assets/stylus/lib/vars'
 .task-item
-  margin 7px
   border 1px solid #BDBDBD
   border-radius 10px
   padding-left 20px
   padding-bottom 5px
   height 80px
+  margin-bottom 5px
 
   .task-content
     float left
-    .task-title
+    width 97%
+    .task-description
       font-size 16px 
       color #494949
-      cursor pointer 
-      transition-duration .5s
+      cursor pointer
       &:hover 
-        letter-spacing 1px
-    .task-description
-      font-size 13px 
-      color #737373
-      line-height 1px  
+        color $second-color 
     .data
       font-size 9px  
       line-height 1px     

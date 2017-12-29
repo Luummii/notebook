@@ -1,5 +1,5 @@
-<template>
-  <div class="home">
+<template lang="html">
+  <div class="currently">
     <div class="content">
       <draggable v-model="tasks" :options="{ animation: 200 }" :no-transition-on-drag="true" @start="drag=true" @end="drag=false">
         <transition-group :name="!drag ? 'list-complete' : null" :css="true">
@@ -33,13 +33,19 @@ export default {
 </script>
 
 <style lang="stylus">
-.home
+@import '../assets/stylus/lib/vars'
+.currently
   margin-top 50px
   .content
     float left
-    width 75%
+    width $width
+    margin-top $margin
+    margin-left $margin
   
   .sidebar
+    position fixed
     float right
     width 24%
+    top 57px
+    right 5px
 </style>

@@ -17,6 +17,9 @@
       <div v-for="day in 31" class="item">
         <p class="date-num">{{ day }}</p>
         <span v-if="day === 3" class="is-busy" :style="{ backgroundColor: '#FF0000' }" ></span>
+        <span v-if="day === 10" class="is-busy" :style="{ backgroundColor: '#FF9900' }" ></span>
+        <span v-if="day === 18" class="is-busy" :style="{ backgroundColor: '#FFF400' }" ></span>
+        <span v-if="day === 23" class="is-busy" :style="{ backgroundColor: '#FFFFFF' }" ></span>
         <span v-if="day === 28" class="is-today" :style="{ borderColor: '#00B5AC', backgroundColor: 'inherit' }"></span>
       </div>
     </div>
@@ -47,9 +50,6 @@ export default {
 <style lang="stylus" scoped>
 @import '../assets/stylus/lib/vars'
 .calendar
-  position fixed
-  margin-top 7px
-  margin-right 5px
   .month 
     position relative
     width 100%
