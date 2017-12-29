@@ -1,11 +1,12 @@
 <template lang="html">
   <div class="add-task">
     <div class="content">
-      <vue-editor v-model="content"></vue-editor>
+      <vue-editor id="editor" v-model="content"></vue-editor>
+      <button class="create-task-button">Create task</button>
     </div>
     <div class="sidebar">
       <event-calendar></event-calendar>
-      <div class="test">
+      <div class="spare-time-choose">
         <spare-time v-for="item in tasks" :id="item" :key="item"></spare-time>
       </div>
     </div>    
@@ -40,6 +41,22 @@ export default {
     width $width    
     margin-top $margin
     margin-left $margin
+    #editor
+      height 250px
+    .create-task-button
+      float right
+      margin-top 10px
+      height 44px
+      border 1px solid $succes-color
+      border-radius 5px
+      font-size 14px
+      color $active-color
+      background $succes-color
+      cursor pointer
+      transition-duration .3s
+      &:hover 
+        background $second-color
+        border 1px solid $second-color
 
   .sidebar
     position fixed
@@ -49,7 +66,7 @@ export default {
     right 5px
     bottom 0
 
-    .test
+    .spare-time-choose
       position absolute
       overflow-y scroll
       bottom 5px

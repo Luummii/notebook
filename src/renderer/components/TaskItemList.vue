@@ -44,6 +44,7 @@ export default {
       font-size 16px 
       color #494949
       cursor pointer
+      transition-duration .3s
       &:hover 
         color $second-color 
     .data

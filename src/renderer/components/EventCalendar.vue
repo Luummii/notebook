@@ -16,9 +16,8 @@
     <div class="days">  
       <div v-for="day in 31" class="item">
         <p class="date-num">{{ day }}</p>
-        <span v-if="day === 3" class="is-busy" :style="{ backgroundColor: '#FF0000' }" ></span>
-        <span v-if="day === 10" class="is-busy" :style="{ backgroundColor: '#FF9900' }" ></span>
-        <span v-if="day === 18" class="is-busy" :style="{ backgroundColor: '#FFF400' }" ></span>
+        <span v-if="day === 3" class="is-busy" :style="{ backgroundColor: '#B74E91' }" ></span>
+        <span v-if="day === 18" class="is-busy" :style="{ backgroundColor: '#E5EA79' }" ></span>
         <span v-if="day === 23" class="is-busy" :style="{ backgroundColor: '#FFFFFF' }" ></span>
         <span v-if="day === 28" class="is-today" :style="{ borderColor: '#00B5AC', backgroundColor: 'inherit' }"></span>
       </div>
@@ -39,9 +38,6 @@ export default {
   methods: {
     weekClass (day) {
       return (day === 'Sat' || day === 'Sun') ? 'weekend' : 'item'
-    },
-    dayClass (day) {
-      return day === 23 ? 'active' : 'date-num'
     }
   }
 }
@@ -73,39 +69,40 @@ export default {
       text-align right
       width 20%
       cursor pointer
-    .arrow-left.icon 
-      color $button-color
-      position absolute
-      left 6%
-      margin-top 10px  
-    .arrow-left.icon:before 
-      content ''
-      position absolute
-      left 1px
-      top -5px
-      width 10px
-      height 10px
-      border-top solid 1px $button-color
-      border-right solid 1px $button-color
-      transform rotate(-135deg)
-    .arrow-right.icon 
-      color $button-color
-      position absolute
-      right 6%
-      margin-top 10px  
-    .arrow-right.icon:before 
-      content ''
-      position absolute
-      right 1px
-      top -5px
-      width 10px
-      height 10px
-      border-top solid 1px $button-color
-      border-right solid 1px $button-color
-      transform rotate(45deg)
     .year    
       font-size 9px
       margin-top 7px
+
+    .arrow-left.icon 
+      position absolute
+      left 6%
+      margin-top 10px
+      transition-duration .3s  
+      &:before 
+        content ''
+        position absolute
+        left 1px
+        top -5px
+        width 10px
+        height 10px
+        border-top solid 1px $button-color
+        border-right solid 1px $button-color
+        transform rotate(-135deg)
+
+    .arrow-right.icon       
+      position absolute
+      right 6%
+      margin-top 10px  
+      &:before 
+        content ''
+        position absolute
+        right 1px
+        top -5px
+        width 10px
+        height 10px
+        border-top solid 1px $button-color
+        border-right solid 1px $button-color
+        transform rotate(45deg)
 
   .weekdays
     padding 0 10px
@@ -114,7 +111,7 @@ export default {
     width 100%
     overflow hidden
     text-align center
-    color $button-color
+    color $active-color
     .item, .weekend
       line-height 30px
       float left
