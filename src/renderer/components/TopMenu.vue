@@ -3,7 +3,7 @@
     <div class="logo"></div>     
     <nav>
       <ul>        
-        <li><router-link tag="a" to="/Currently">Currently</router-link></li>
+        <li><router-link tag="a" to="/Tasks">Tasks</router-link></li>
         <li><router-link tag="a" to="/Notes">Notes</router-link></li>
         <li><router-link tag="a" to="/Options">Options</router-link></li>
         <li><router-link tag="a" to="/AddTask" class="add-task-button">Add Task</router-link></li>
