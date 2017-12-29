@@ -19,7 +19,7 @@ import TaskItemList from '../components/TaskItemList.vue'
 import draggable from 'vuedraggable'
 
 export default {
-  name: 'Home',
+  name: 'Currently',
   components: {
     EventCalendar, TaskItemList, draggable
   },
