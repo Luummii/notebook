@@ -5,6 +5,7 @@ import Currently from '../pages/Currently.vue'
 import Task from '../pages/Task.vue'
 import Notes from '../pages/Notes.vue'
 import Options from '../pages/Options.vue'
+import AddTask from '../pages/AddTask.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,7 @@ export default new VueRouter({
     { path: '/Task/:id', name: 'Task', component: Task },
     { path: '/Notes', name: 'Notes', component: Notes },
     { path: '/Options', name: 'Options', component: Options },
+    { path: '/AddTask', name: 'AddTask', component: AddTask },
     { path: '*', redirect: '/Currently' }
   ]
 })

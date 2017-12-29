@@ -6,6 +6,7 @@
         <li><router-link tag="a" to="/Currently">Currently</router-link></li>
         <li><router-link tag="a" to="/Notes">Notes</router-link></li>
         <li><router-link tag="a" to="/Options">Options</router-link></li>
+        <li><router-link tag="a" to="/AddTask" class="add-task-button">Add Task</router-link></li>
       </ul>
     </nav>
   </div>
@@ -69,6 +70,14 @@ export default {
           transition-duration .3s
           &:hover 
             color $hover-color
-          &.active 
-            color $active-color				
+          &.router-link-active 
+            color $active-color		
+
+        .add-task-button
+          border 1px solid $button-color
+          padding 3px	
+          border-radius 3px
+
+          &.router-link-active 
+            border 1px solid $active-color
 </style>
