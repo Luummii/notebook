@@ -5,6 +5,9 @@
     </div>
     <div class="sidebar">
       <event-calendar></event-calendar>
+      <div class="test">
+        <spare-time v-for="item in tasks" :id="item" :key="item"></spare-time>
+      </div>
     </div>    
   </div>
 </template>
@@ -12,15 +15,17 @@
 <script>
 import { VueEditor } from 'vue2-editor'
 import EventCalendar from '../components/EventCalendar.vue'
+import SpareTime from '../components/SpareTimeItemList.vue'
 
 export default {
   name: 'AddTask',
   components: {
-    VueEditor, EventCalendar
+    VueEditor, EventCalendar, SpareTime
   },
   data () {
     return {
-      content: ''
+      content: '',
+      tasks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
     }
   }
 }
@@ -32,7 +37,7 @@ export default {
   margin-top 50px
   .content
     float left
-    width $width
+    width $width    
     margin-top $margin
     margin-left $margin
 
@@ -42,4 +47,16 @@ export default {
     width 24%
     top 57px
     right 5px
+    bottom 0
+
+    .test
+      position absolute
+      overflow-y scroll
+      bottom 5px
+      top 360px
+      right 0px
+      left 0
+      &::-webkit-scrollbar 
+        width: 0  
+        background: transparent
 </style>
