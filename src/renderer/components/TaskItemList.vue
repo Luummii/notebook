@@ -2,12 +2,12 @@
   <div class="task-item">    
     <div class="task-content">
       <p class="data">23.05.1979</p>
-      <p class="task-description" @click="goToPath(id)">Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
+      <p class="task-description" @click="goToPath(id)" :style="{ textDecoration: textDecoration }">Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
                                   Adipisicing aliquip id nulla id nisi qui ad adipisicing. Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
                                   Adipisicing aliquip id nulla id ... </p>
     </div>
     <div class="task-options">      
-      <input type="checkbox" :id="id" name="cc" />
+      <input type="checkbox" :id="id" @click="onCheckedClick()" :checked="check"/>
       <label :for="id"><span></span></label>      
     </div>
   </div>
@@ -21,7 +21,15 @@ export default {
   },
   data () {
     return {
-      
+      textDecoration: 'none',
+      check: false
+    }
+  },
+  methods: {
+    onCheckedClick () {
+      console.log(this.check)
+      this.check = !this.check
+      this.textDecoration = this.check === false ? 'none' : 'line-through'
     }
   }
 }
@@ -44,7 +52,8 @@ export default {
       font-size 16px 
       color #494949
       cursor pointer
-      transition-duration .3s
+      text-decoration none
+      transition-duration .5s
       &:hover 
         color $second-color 
     .data
