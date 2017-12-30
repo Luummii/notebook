@@ -17,7 +17,7 @@
       <div v-for="item in dayList()" class="item">
         <p class="date-num" :style="{ cursor: item.status ? 'pointer' : 'default', color: item.status ? '#897EA4' : '#7154C2' }">{{ item.day }}</p>
         <span v-if="item.day == 3" class="is-busy" :style="{ backgroundColor: '#B74E91' }"></span>
-        <span v-if="item.day == 18" class="is-busy" :style="{ backgroundColor: '#E5EA79' }"></span>
+        <span v-if="item.day == 18" class="is-busy" :style="{ backgroundColor: '#C7CB00' }"></span>
         <span v-if="item.day == 23" class="is-busy" :style="{ backgroundColor: '#FFFFFF' }"></span>
         <span v-if="item.day == 28" class="is-today" :style="{ borderColor: '#00B5AC', backgroundColor: 'inherit' }"></span>
       </div>
