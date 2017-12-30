@@ -3,18 +3,18 @@
     <div class="month"> 
       <div class="left"><div class="arrow-left icon"></div></div>
       <div class="title">
-        August
-        <div class="year">2017</div>
+        {{ toDay().month }}
+        <div class="year">{{ toDay().year }}</div>
       </div>
       <div class="right"><div class="arrow-right icon"></div></div>
     </div>
     <div class="weekdays">
-      <span v-for="(day, index) in days" :class="weekClass(day)" :key="index">
+      <span v-for="(day, index) in i18n[locale].dayNames" :class="weekClass(day)" :key="index">
         {{ day }}
       </span>
     </div>
     <div class="days">  
-      <div v-for="day in 31" class="item">
+      <div v-for="day in days" class="item">
         <p class="date-num">{{ day }}</p>
         <span v-if="day === 3" class="is-busy" :style="{ backgroundColor: '#B74E91' }" ></span>
         <span v-if="day === 18" class="is-busy" :style="{ backgroundColor: '#E5EA79' }" ></span>
@@ -32,12 +32,26 @@ export default {
   name: 'Calendar',
   data () {
     return {
-      days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      i18n,
+      locale: 'en',
+      days: Number
     }
+  },
+  created () {
+    const dateObj = new Date()
+    this.days = dateObj.getDate()
+    console.log('dateObj.getDate() = ', dateObj.getDate())
+    console.log('dateObj.getFullYear() = ', dateObj.getFullYear())
+    console.log('dateObj.getMonth() = ', dateObj.getMonth())
   },
   methods: {
     weekClass (day) {
       return (day === 'Sat' || day === 'Sun') ? 'weekend' : 'item'
+    },
+    toDay () {
+      const dateObj = new Date()
+      let month = this.i18n[this.locale].monthNames[dateObj.getMonth()]      
+      return { month: month, year: dateObj.getFullYear() }
     }
   }
 }

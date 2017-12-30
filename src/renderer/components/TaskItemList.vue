@@ -27,7 +27,6 @@ export default {
   },
   methods: {
     onCheckedClick () {
-      console.log(this.check)
       this.check = !this.check
       this.textDecoration = this.check === false ? 'none' : 'line-through'
     }

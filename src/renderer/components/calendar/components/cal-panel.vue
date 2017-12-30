@@ -122,12 +122,7 @@ export default {
     preMonth () {
       this.$EventCalendar.preMonth()
       this.$emit('month-changed', this.curYearMonth)
-    },
-    handleChangeCurday (date) {
-      if (date.status) {
-        this.$emit('cur-day-changed', date.date)
-      }
-    }
+    }z
   }
 }
 </script>
