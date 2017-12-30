@@ -9,17 +9,17 @@
       <div class="right"><div class="arrow-right icon"></div></div>
     </div>
     <div class="weekdays">
-      <span v-for="(day, index) in i18n[locale].dayNames" :class="weekClass(day)" :key="index">
-        {{ day }}
+      <span v-for="(weekDay, index) in i18n[locale].dayNames" :class="weekClass(weekDay)" :key="index">
+        {{ weekDay }}
       </span>
     </div>
     <div class="days">  
-      <div v-for="day in days" class="item">
-        <p class="date-num">{{ day }}</p>
-        <span v-if="day === 3" class="is-busy" :style="{ backgroundColor: '#B74E91' }" ></span>
-        <span v-if="day === 18" class="is-busy" :style="{ backgroundColor: '#E5EA79' }" ></span>
-        <span v-if="day === 23" class="is-busy" :style="{ backgroundColor: '#FFFFFF' }" ></span>
-        <span v-if="day === 28" class="is-today" :style="{ borderColor: '#00B5AC', backgroundColor: 'inherit' }"></span>
+      <div v-for="item in dayList()" class="item">
+        <p class="date-num" :style="{ cursor: item.status ? 'pointer' : 'default', color: item.status ? '#897EA4' : '#7154C2' }">{{ item.day }}</p>
+        <span v-if="item.day == 3" class="is-busy" :style="{ backgroundColor: '#B74E91' }"></span>
+        <span v-if="item.day == 18" class="is-busy" :style="{ backgroundColor: '#E5EA79' }"></span>
+        <span v-if="item.day == 23" class="is-busy" :style="{ backgroundColor: '#FFFFFF' }"></span>
+        <span v-if="item.day == 28" class="is-today" :style="{ borderColor: '#00B5AC', backgroundColor: 'inherit' }"></span>
       </div>
     </div>
   </div>
@@ -34,24 +34,46 @@ export default {
     return {
       i18n,
       locale: 'en',
-      days: Number
+      days: Number,
+      dateObj: new Date()
     }
   },
   created () {
-    const dateObj = new Date()
-    this.days = dateObj.getDate()
-    console.log('dateObj.getDate() = ', dateObj.getDate())
-    console.log('dateObj.getFullYear() = ', dateObj.getFullYear())
-    console.log('dateObj.getMonth() = ', dateObj.getMonth())
+    this.days = this.dateObj.getDate()
   },
   methods: {
     weekClass (day) {
       return (day === 'Sat' || day === 'Sun') ? 'weekend' : 'item'
     },
     toDay () {
-      const dateObj = new Date()
-      let month = this.i18n[this.locale].monthNames[dateObj.getMonth()]      
-      return { month: month, year: dateObj.getFullYear() }
+      let month = this.i18n[this.locale].monthNames[this.dateObj.getMonth()]      
+      return { month: month, year: this.dateObj.getFullYear() }
+    },
+    dayList () {
+      let firstDayInCurentMonth = new Date(this.dateObj.getFullYear(), this.dateObj.getMonth(), 1)
+      console.log('firstDayInCurentMonth = ', firstDayInCurentMonth)
+      
+      let dayOfWeek = firstDayInCurentMonth.getDay()
+      let startDate = new Date(firstDayInCurentMonth)
+      startDate.setDate(firstDayInCurentMonth.getDate() - dayOfWeek + 1)
+
+      let item, status, tempArr = [], tempItem
+      for (let i = 0 ; i < 42 ; i++) {
+        item = new Date(startDate)
+        item.setDate(startDate.getDate() + i) // +i т.к. неделя начинается с понедельника
+
+        if (this.dateObj.getMonth() === item.getMonth()) {
+          status = 1
+        } else {
+          status = 0
+        }
+        tempItem = {
+          day: `${item.getDate()}`,
+          status: status
+        }
+        tempArr.push(tempItem)
+      }
+      return tempArr
     }
   }
 }
@@ -125,7 +147,7 @@ export default {
     width 100%
     overflow hidden
     text-align center
-    color $active-color
+    color $button-color
     .item, .weekend
       line-height 30px
       float left
@@ -155,10 +177,10 @@ export default {
         color $hover-color
       .is-busy
         content ''
-        width 14px
+        width 15px
         height 3px
         position absolute
-        left 50%
+        left 49%
         top 50%
         z-index 2
         margin-left -7px
