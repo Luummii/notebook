@@ -70,7 +70,7 @@ export default {
       position absolute
       overflow-y scroll
       bottom 5px
-      top 360px
+      top 407px
       right 0px
       left 0
       &::-webkit-scrollbar 
