@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="task-item">    
+  <div class="task-item" :style="{ border: check ? `2px solid #00B5AC` : `1px solid #BDBDBD` }">    
     <div class="task-content">
       <p class="data">23.05.1979</p>
       <p class="task-description" @click="goToPath(id)" :style="{ textDecoration: textDecoration }">Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
