@@ -87,7 +87,7 @@ export default {
     width 100%
     background-color $second-color
     overflow hidden
-    color $button-color
+    color $active-color
     border-radius 10px 10px 0 0
     &>div
       float left
@@ -121,8 +121,8 @@ export default {
         top -5px
         width 10px
         height 10px
-        border-top solid 1px $button-color
-        border-right solid 1px $button-color
+        border-top solid 1px $active-color
+        border-right solid 1px $active-color
         transform rotate(-135deg)
 
     .arrow-right.icon       
@@ -136,8 +136,8 @@ export default {
         top -5px
         width 10px
         height 10px
-        border-top solid 1px $button-color
-        border-right solid 1px $button-color
+        border-top solid 1px $active-color
+        border-right solid 1px $active-color
         transform rotate(45deg)
 
   .weekdays
@@ -147,7 +147,7 @@ export default {
     width 100%
     overflow hidden
     text-align center
-    color $button-color
+    color $active-color
     .item, .weekend
       line-height 30px
       float left
