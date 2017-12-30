@@ -1,9 +1,12 @@
 <template lang="html">
   <div class="task-item" :style="{ border: check ? `2px solid #00B5AC` : `1px solid #BDBDBD` }">    
     <div class="task-content">
-      <p class="data">23.05.1979</p>
-      <p class="task-description" @click="goToPath(id)" :style="{ textDecoration: check ? 'line-through' : 'none', color: check ? '#989898' : '#494949'}">Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
-                                  Adipisicing aliquip id nulla id nisi qui ad adipisicing. Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
+      <p class="data" :style="{ color: check ? '#989898' : '#494949'}">23.05.1979</p>
+      <p class="task-description" @click="goToPath(id)" 
+                                  :style="{ textDecoration: check ? 'line-through' : 'none', color: check ? '#989898' : '#494949'}">
+                                  Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
+                                  Adipisicing aliquip id nulla id nisi qui ad adipisicing. 
+                                  Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
                                   Adipisicing aliquip id nulla id ... </p>
     </div>
     <div class="task-options">      
