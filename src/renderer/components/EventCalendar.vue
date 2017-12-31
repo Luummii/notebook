@@ -19,7 +19,7 @@
         <span v-if="item.day == 3" class="is-busy" :style="{ backgroundColor: '#B74E91', cursor: item.status ? 'pointer' : 'default' }"></span>
         <span v-if="item.day == 18" class="is-busy" :style="{ backgroundColor: '#C7CB00', cursor: item.status ? 'pointer' : 'default' }"></span>
         <span v-if="item.day == 23" class="is-busy" :style="{ backgroundColor: '#FFFFFF', cursor: item.status ? 'pointer' : 'default' }"></span>
-        <span v-if="item.day == 28" class="is-today" :style="{ borderColor: '#00B5AC', backgroundColor: 'inherit', cursor: item.status ? 'pointer' : 'default' }"></span>
+        <span v-if="curDayShow(item)" class="is-today" :style="{ borderColor: '#00B5AC', backgroundColor: 'inherit', cursor: item.status ? 'pointer' : 'default' }"></span>
       </div>
     </div>
   </div>
@@ -36,12 +36,16 @@ export default {
       locale: 'en',
       days: Number,
       dateObj: new Date(),
-      daysArr: [],
+      curDay: new Date().getDate(),
       curMonth: new Date().getMonth(),
-      curYear: new Date().getFullYear()
+      curYear: new Date().getFullYear(),
+      daysArr: [],
+      month: new Date().getMonth(),
+      year: new Date().getFullYear()
     }
   },
   created () {
+    console.log(this.dateObj.toDateString())
     this.days = this.dateObj.getDate()
     this.dayList(this.dateObj) 
   },
@@ -83,26 +87,29 @@ export default {
       this.daysArr = daysArr
     },
     preMonth () {
-      if (this.curMonth > 0) {
-        this.curMonth--
+      if (this.month > 0) {
+        this.month--
       } else {
-        this.curYear--
-        this.curMonth = 11
+        this.year--
+        this.month = 11
       }
-      this.dateObj.setYear(this.curYear)
-      this.dateObj.setMonth(this.curMonth)      
+      this.dateObj.setYear(this.year)
+      this.dateObj.setMonth(this.month)      
       this.dayList()
     },
     nextMonth () {
-      if (this.curMonth < 11) {
-        this.curMonth++
+      if (this.month < 11) {
+        this.month++
       } else {
-        this.curYear++
-        this.curMonth = 0
+        this.year++
+        this.month = 0
       }
-      this.dateObj.setYear(this.curYear)
-      this.dateObj.setMonth(this.curMonth)      
+      this.dateObj.setYear(this.year)
+      this.dateObj.setMonth(this.month)      
       this.dayList()
+    },
+    curDayShow (item) {
+      if (this.curDay == item.day && this.curMonth === this.dateObj.getMonth() && this.curYear === this.dateObj.getFullYear()) return true
     }
   }
 }
