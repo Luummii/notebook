@@ -15,7 +15,7 @@
     </div>
     <div class="days">  
       <div v-for="item in daysArr" class="item">
-        <p class="date-num" :style="{ cursor: item.status ? 'pointer' : 'default', color: item.status ? '#897EA4' : '#7154C2' }">{{ item.day }}</p>
+        <p class="date-num" :style="{ cursor: item.status ? 'pointer' : 'default', color: item.color }" @mouseover="mouseOver(item, true)" @mouseleave="mouseOver(item, false)">{{ item.day }}</p>
         <span v-if="item.day == 3" class="is-busy" :style="{ backgroundColor: '#B74E91', cursor: item.status ? 'pointer' : 'default' }"></span>
         <span v-if="item.day == 18" class="is-busy" :style="{ backgroundColor: '#C7CB00', cursor: item.status ? 'pointer' : 'default' }"></span>
         <span v-if="item.day == 23" class="is-busy" :style="{ backgroundColor: '#FFFFFF', cursor: item.status ? 'pointer' : 'default' }"></span>
@@ -41,11 +41,11 @@ export default {
       curYear: new Date().getFullYear(),
       daysArr: [],
       month: new Date().getMonth(),
-      year: new Date().getFullYear()
+      year: new Date().getFullYear(),
+      chooseDay: new Date().getDate() // применить к выбору дня!
     }
   },
   created () {
-    console.log(this.dateObj.toDateString())
     this.days = this.dateObj.getDate()
     this.dayList(this.dateObj) 
   },
@@ -78,9 +78,14 @@ export default {
         } else {
           status = 0
         }
+        const colorItem = () => {
+          if (this.curDay == item.getDate() && this.curMonth === item.getMonth() && this.curYear === item.getFullYear()) return '#ffffff'
+          return status ? '#897EA4' : '#7154C2'
+        }
         tempItem = {
           day: `${item.getDate()}`,
-          status: status
+          status: status,
+          color: colorItem()
         }
         daysArr.push(tempItem)
       }
@@ -110,6 +115,15 @@ export default {
     },
     curDayShow (item) {
       if (this.curDay == item.day && this.curMonth === this.dateObj.getMonth() && this.curYear === this.dateObj.getFullYear()) return true
+    },
+    mouseOver (item, over) {
+      if (over && item.status) {
+        item.color = '#ffffff'
+      } else if (this.curDay == item.day && this.curMonth === this.dateObj.getMonth() && this.curYear === this.dateObj.getFullYear()) {
+        item.color = '#ffffff'
+      } else {
+        item.color = item.status ? '#897EA4' : '#7154C2'
+      }
     }
   }
 }
@@ -208,6 +222,7 @@ export default {
         cursor pointer
         font-size 16px
         position relative
+        transition-duration .3s
       .is-busy
         content ''
         width 15px
@@ -223,13 +238,12 @@ export default {
         content ''
         border 1px solid #00B5AC
         background-color #fff
-        border-radius 50%
+        border-radius 50%        
         width 36px
         height 36px
         position absolute
         left 50%
         top 50%
-        z-index 2
         margin-left -18px
         margin-top -19px
         cursor pointer
