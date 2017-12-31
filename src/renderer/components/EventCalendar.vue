@@ -1,12 +1,12 @@
 <template lang="html">
   <div class="calendar">
     <div class="month"> 
-      <div class="left"><div class="arrow-left icon"></div></div>
+      <div class="left" @click="preMonth"><div class="arrow-left icon"></div></div>
       <div class="title">
         {{ toDay().month }}
         <div class="year">{{ toDay().year }}</div>
       </div>
-      <div class="right"><div class="arrow-right icon"></div></div>
+      <div class="right" @click="nextMonth"><div class="arrow-right icon"></div></div>
     </div>
     <div class="weekdays">
       <span v-for="(weekDay, index) in i18n[locale].dayNames" :class="weekClass(weekDay)" :key="index">
@@ -14,7 +14,7 @@
       </span>
     </div>
     <div class="days">  
-      <div v-for="item in dayList()" class="item">
+      <div v-for="item in daysArr" class="item">
         <p class="date-num" :style="{ cursor: item.status ? 'pointer' : 'default', color: item.status ? '#897EA4' : '#7154C2' }">{{ item.day }}</p>
         <span v-if="item.day == 3" class="is-busy" :style="{ backgroundColor: '#B74E91', cursor: item.status ? 'pointer' : 'default' }"></span>
         <span v-if="item.day == 18" class="is-busy" :style="{ backgroundColor: '#C7CB00', cursor: item.status ? 'pointer' : 'default' }"></span>
@@ -35,11 +35,15 @@ export default {
       i18n,
       locale: 'en',
       days: Number,
-      dateObj: new Date()
+      dateObj: new Date(),
+      daysArr: [],
+      curMonth: new Date().getMonth(),
+      curYear: new Date().getFullYear()
     }
   },
   created () {
     this.days = this.dateObj.getDate()
+    this.dayList(this.dateObj) 
   },
   methods: {
     weekClass (day) {
@@ -51,14 +55,19 @@ export default {
     },
     dayList () {
       let firstDayInCurentMonth = new Date(this.dateObj.getFullYear(), this.dateObj.getMonth(), 1)      
-      let dayOfWeek = firstDayInCurentMonth.getDay()
-      let startDate = new Date(firstDayInCurentMonth)
-      startDate.setDate(firstDayInCurentMonth.getDate() - dayOfWeek + 1)
+      let dayOfWeek = firstDayInCurentMonth.getDay()    
+      if (1 > dayOfWeek) {
+        dayOfWeek = dayOfWeek - 1 + 7
+      } else {
+        dayOfWeek = dayOfWeek - 1
+      }
 
-      let item, status, tempArr = [], tempItem
+      let startDate = new Date(firstDayInCurentMonth)
+      startDate.setDate(firstDayInCurentMonth.getDate() - dayOfWeek)
+      let item, status, daysArr = [], tempItem
       for (let i = 0 ; i < 42 ; i++) {
         item = new Date(startDate)
-        item.setDate(startDate.getDate() + i) // +i т.к. неделя начинается с понедельника
+        item.setDate(startDate.getDate() + i)
 
         if (this.dateObj.getMonth() === item.getMonth()) {
           status = 1
@@ -69,9 +78,31 @@ export default {
           day: `${item.getDate()}`,
           status: status
         }
-        tempArr.push(tempItem)
+        daysArr.push(tempItem)
       }
-      return tempArr
+      this.daysArr = daysArr
+    },
+    preMonth () {
+      if (this.curMonth > 0) {
+        this.curMonth--
+      } else {
+        this.curYear--
+        this.curMonth = 11
+      }
+      this.dateObj.setYear(this.curYear)
+      this.dateObj.setMonth(this.curMonth)      
+      this.dayList()
+    },
+    nextMonth () {
+      if (this.curMonth < 11) {
+        this.curMonth++
+      } else {
+        this.curYear++
+        this.curMonth = 0
+      }
+      this.dateObj.setYear(this.curYear)
+      this.dateObj.setMonth(this.curMonth)      
+      this.dayList()
     }
   }
 }
