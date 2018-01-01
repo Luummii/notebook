@@ -3,8 +3,8 @@
     <div class="month"> 
       <div class="left" @click="preMonth"><div class="arrow-left icon"></div></div>
       <div class="title">
-        {{ toDay().month }}
-        <div class="year">{{ toDay().year }}</div>
+        {{ showData().month }}
+        <div class="year">{{ showData().year }}</div>
       </div>
       <div class="right" @click="nextMonth"><div class="arrow-right icon"></div></div>
     </div>
@@ -15,7 +15,10 @@
     </div>
     <div class="days">  
       <div v-for="item in daysArr" class="item">
-        <p class="date-num" :style="{ cursor: item.status ? 'pointer' : 'default', color: item.color }" @mouseover="mouseOver(item, true)" @mouseleave="mouseOver(item, false)">{{ item.day }}</p>
+        <p class="date-num" :style="{ cursor: item.status ? 'pointer' : 'default', color: item.choose ? '#ffffff' : item.color }" 
+                            @mouseover="mouseOver(item, true)" 
+                            @mouseleave="mouseOver(item, false)"
+                            @click="chooseDay(item)">{{ item.day }}</p>
         <span v-if="item.day == 3" class="is-busy" :style="{ backgroundColor: '#B74E91', cursor: item.status ? 'pointer' : 'default' }"></span>
         <span v-if="item.day == 18" class="is-busy" :style="{ backgroundColor: '#C7CB00', cursor: item.status ? 'pointer' : 'default' }"></span>
         <span v-if="item.day == 23" class="is-busy" :style="{ backgroundColor: '#FFFFFF', cursor: item.status ? 'pointer' : 'default' }"></span>
@@ -41,8 +44,7 @@ export default {
       curYear: new Date().getFullYear(),
       daysArr: [],
       month: new Date().getMonth(),
-      year: new Date().getFullYear(),
-      chooseDay: new Date().getDate() // применить к выбору дня!
+      year: new Date().getFullYear()
     }
   },
   created () {
@@ -53,7 +55,7 @@ export default {
     weekClass (day) {
       return (day === 'Sat' || day === 'Sun') ? 'weekend' : 'item'
     },
-    toDay () {
+    showData () {
       let month = this.i18n[this.locale].monthNames[this.dateObj.getMonth()]      
       return { month: month, year: this.dateObj.getFullYear() }
     },
@@ -78,14 +80,12 @@ export default {
         } else {
           status = 0
         }
-        const colorItem = () => {
-          if (this.curDay == item.getDate() && this.curMonth === item.getMonth() && this.curYear === item.getFullYear()) return '#ffffff'
-          return status ? '#897EA4' : '#7154C2'
-        }
+
         tempItem = {
           day: `${item.getDate()}`,
           status: status,
-          color: colorItem()
+          color: status ? '#897EA4' : '#7154C2',
+          choose: false
         }
         daysArr.push(tempItem)
       }
@@ -114,16 +114,20 @@ export default {
       this.dayList()
     },
     curDayShow (item) {
-      if (this.curDay == item.day && this.curMonth === this.dateObj.getMonth() && this.curYear === this.dateObj.getFullYear()) return true
+      if (this.curDay == item.day && this.curMonth === this.dateObj.getMonth() && this.curYear === this.dateObj.getFullYear() && item.status) return true
     },
     mouseOver (item, over) {
       if (over && item.status) {
         item.color = '#ffffff'
-      } else if (this.curDay == item.day && this.curMonth === this.dateObj.getMonth() && this.curYear === this.dateObj.getFullYear()) {
-        item.color = '#ffffff'
       } else {
         item.color = item.status ? '#897EA4' : '#7154C2'
       }
+    },
+    chooseDay (item) {
+      this.daysArr.forEach(day => {
+        day.choose = false
+      })
+      if (item.status) item.choose = true
     }
   }
 }
@@ -223,6 +227,7 @@ export default {
         font-size 16px
         position relative
         transition-duration .3s
+        z-index 2
       .is-busy
         content ''
         width 15px
@@ -230,7 +235,6 @@ export default {
         position absolute
         left 49%
         top 50%
-        z-index 2
         margin-left -7px
         margin-top 10px
         cursor pointer
@@ -244,6 +248,7 @@ export default {
         position absolute
         left 50%
         top 50%
+        z-index 1
         margin-left -18px
         margin-top -19px
         cursor pointer
