@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
+import firebase from 'firebase'
 
 import App from './App'
 import router from './router'
@@ -20,6 +21,17 @@ Vue.mixin({
     }
   }
 })
+
+// firebase
+const config = {
+  apiKey: "AIzaSyAbGFxgjGMXz_MhlkaaK18TiKNMkBH32Sk",
+  authDomain: "notebook-vuejsfun.firebaseapp.com",
+  databaseURL: "https://notebook-vuejsfun.firebaseio.com",
+  projectId: "notebook-vuejsfun",
+  storageBucket: "notebook-vuejsfun.appspot.com",
+  messagingSenderId: "753421648668"
+}
+firebase.initializeApp(config)
 
 /* eslint-disable no-new */
 new Vue({

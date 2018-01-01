@@ -2,7 +2,7 @@
   <div class="add-task">
     <div class="content">
       <vue-editor id="editor" v-model="content"></vue-editor>
-      <button class="create-task-button">Create task</button>
+      <button class="create-task-button" @click="createTask">Create task</button>
     </div>
     <div class="sidebar">
       <event-calendar></event-calendar>
@@ -17,6 +17,7 @@
 import { VueEditor } from 'vue2-editor'
 import EventCalendar from '../components/EventCalendar.vue'
 import SpareTime from '../components/SpareTimeItemList.vue'
+import firebase from 'firebase'
 
 export default {
   name: 'AddTask',
@@ -27,6 +28,16 @@ export default {
     return {
       content: '',
       tasks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+    }
+  },
+  methods: {
+    createTask () {
+      const firebaseLoger = firebase.database().ref(`search_ingredients`)
+      const loger = firebaseLoger.push()
+      loger.set({
+        'user_id': `test`,
+        'selected_ingredients': 'ingredients'
+      })
     }
   }
 }
