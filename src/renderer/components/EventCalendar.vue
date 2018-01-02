@@ -129,7 +129,7 @@ export default {
       })
       if (item.status) {
         item.choose = true        
-        this.$eventStore.$emit('getTasks', { day: item.day, month: this.dateObj.getMonth() + 1, year: this.dateObj.getFullYear() })        
+        this.$eventStore.$emit('getTasks', { day: item.day, month: this.dateObj.getMonth(), year: this.dateObj.getFullYear() })        
       }
 
     }

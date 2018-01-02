@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import firebase from 'firebase'
 import config from '../../config/firebase'
+import lodash from 'lodash'
+import VueLodash from 'vue-lodash'
 
 import App from './App'
 import router from './router'
@@ -21,6 +23,8 @@ Vue.mixin({
 })
 
 firebase.initializeApp(config)
+
+Vue.use(VueLodash, lodash)
 
 /* eslint-disable no-new */
 new Vue({

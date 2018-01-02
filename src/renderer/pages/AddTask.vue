@@ -28,15 +28,18 @@ export default {
     return {
       content: '',
       tasks: [],
-      chooseDate: {}
+      chooseDate: { day: new Date().getDate(), month: new Date().getMonth(), year: new Date().getFullYear() },
+      hoursTask: []
     }
   },
   created () {
-    this.createTimeLine()
+    this.getTasks(this.chooseDate)
     this.$eventStore.$on('getTasks', this.getTasks)
+    this.$eventStore.$on('sheckedTime', this.sheckedTime)
   },
   beforeDestroy () {
     this.$eventStore.$off('getTasks')
+    this.$eventStore.$off('sheckedTime')
   },
   methods: {
     getTasks (dateObj) {      
@@ -45,29 +48,38 @@ export default {
       const date = `${day}${month}${year}`
       const firebaseTask = firebase.database().ref(`tasks/${date}`)
       firebaseTask.orderByKey().on('value', (snapshot) => {
-        this.createTimeLine(snapshot.val())
-        firebaseTask.off('value')
+        this.createTimeLine(snapshot.val())        
       })
     },
     createTimeLine (time = {}) {
       this.tasks = []
       for (let i = 0; i < 24; i++) {
-        this.tasks.push({ id: i + 1, time: `${i < 10 ? '0' + i : i}-00 ... ${(i + 1) < 10 ? '0' + (i + 1) : (i + 1)}-00`})
-      }     
-      for (let a in time) {
-        this.tasks.splice(a, 1)
+        this.tasks.push({ id: i, time: `${i < 10 ? '0' + i : i}-00 ... ${(i + 1) < 10 ? '0' + (i + 1) : (i + 1)}-00`})
       }
+      const del = []    
+      for (let a in time) {
+        del.push(a)
+      }
+      this._.pullAt(this.tasks, del)
+    },
+    sheckedTime (id) {      
+      if (this.hoursTask.indexOf(id) != -1) {        
+        this.hoursTask.splice(id, 1)
+      } else {
+        this.hoursTask.push(id)
+      }      
     },
     createTask () {
-      const day = this.chooseDate.day
-      const month = this.chooseDate.month
-      const year = this.chooseDate.year
-      const hour = 9
-      const firebaseTask = firebase.database().ref(`tasks/${day}${month}${year}/${hour}`)
-      firebaseTask.set({
-        'content': this.content,
-        'state': 'open'
-      })
+      const { day, month, year } = this.chooseDate
+      const hour = this.hoursTask
+      console.log('day = ', day, 'month = ', month, 'year = ', year, 'hour = ', hour)
+      for (let i = 0; i < this.hoursTask.length; i++) {
+        const firebaseTask = firebase.database().ref(`tasks/${day}${month}${year}/${this.hoursTask[i]}`)
+        firebaseTask.set({
+          'content': this.content,
+          'state': 'open'
+        })
+      }     
     }
   }
 }

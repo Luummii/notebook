@@ -4,7 +4,7 @@
       {{ time }}    
     </div>
     <div class="spare-time-options">      
-      <input type="checkbox" :id="id" name="cc" />
+      <input type="checkbox" :id="id" @click="onCheckedClick(id)" name="cc" />
       <label :for="id"><span></span></label>      
     </div>
   </div>
@@ -20,6 +20,11 @@ export default {
   data () {
     return {
       
+    }
+  },
+  methods: {
+    onCheckedClick (id) {
+      this.$eventStore.$emit('sheckedTime', id)
     }
   }
 }
