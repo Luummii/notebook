@@ -7,7 +7,7 @@
     <div class="sidebar">
       <event-calendar></event-calendar>
       <div class="spare-time-choose">
-        <spare-time v-for="item in tasks" :id="item" :key="item"></spare-time>
+        <spare-time v-for="item in tasks" :id="item.id" :key="item.id" :time="item.time"></spare-time>
       </div>
     </div>    
   </div>
@@ -27,31 +27,46 @@ export default {
   data () {
     return {
       content: '',
-      tasks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      tasks: [],
+      chooseDate: {}
     }
   },
   created () {
+    this.createTimeLine()
     this.$eventStore.$on('getTasks', this.getTasks)
   },
   beforeDestroy () {
     this.$eventStore.$off('getTasks')
   },
   methods: {
-    getTasks (data) {
-      console.log('data = ', data)
-      const firebaseTask = firebase.database().ref(`tasks/${data}`)
-      firebaseTask.orderByValue().on('value', (snapshot) => {
-        console.log(snapshot.val())
+    getTasks (dateObj) {      
+      this.chooseDate = dateObj
+      const { day, month, year } = dateObj
+      const date = `${day}${month}${year}`
+      const firebaseTask = firebase.database().ref(`tasks/${date}`)
+      firebaseTask.orderByKey().on('value', (snapshot) => {
+        this.createTimeLine(snapshot.val())
+        firebaseTask.off('value')
       })
     },
+    createTimeLine (time = {}) {
+      this.tasks = []
+      for (let i = 0; i < 24; i++) {
+        this.tasks.push({ id: i + 1, time: `${i < 10 ? '0' + i : i}-00 ... ${(i + 1) < 10 ? '0' + (i + 1) : (i + 1)}-00`})
+      }     
+      for (let a in time) {
+        this.tasks.splice(a, 1)
+      }
+    },
     createTask () {
-      const day = 31
-      const month = 1
-      const year = 2018
-      const hour = 14
+      const day = this.chooseDate.day
+      const month = this.chooseDate.month
+      const year = this.chooseDate.year
+      const hour = 9
       const firebaseTask = firebase.database().ref(`tasks/${day}${month}${year}/${hour}`)
       firebaseTask.set({
-        'content': this.content
+        'content': this.content,
+        'state': 'open'
       })
     }
   }

@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="spare-time-item">
     <div class="spare-time-content">
-      {{ id }}    
+      {{ time }}    
     </div>
     <div class="spare-time-options">      
       <input type="checkbox" :id="id" name="cc" />
@@ -14,7 +14,8 @@
 export default {
   name: 'SpareTime',
   props: {
-    id: Number 
+    id: Number,
+    time: String 
   },
   data () {
     return {

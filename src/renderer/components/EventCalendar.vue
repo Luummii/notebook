@@ -128,9 +128,8 @@ export default {
         day.choose = false
       })
       if (item.status) {
-        item.choose = true
-        const data = `${item.day}${this.dateObj.getMonth() + 1}${this.dateObj.getFullYear()}`
-        this.$eventStore.$emit('getTasks', data)        
+        item.choose = true        
+        this.$eventStore.$emit('getTasks', { day: item.day, month: this.dateObj.getMonth() + 1, year: this.dateObj.getFullYear() })        
       }
 
     }
