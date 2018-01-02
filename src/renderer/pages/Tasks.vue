@@ -1,11 +1,7 @@
 <template lang="html">
   <div class="currently">
     <div class="content">
-      <draggable v-model="tasks" :options="{ animation: 200 }" :no-transition-on-drag="true" @start="drag=true" @end="drag=false">
-        <transition-group :name="!drag ? 'list-complete' : null" :css="true">
-          <task-item-list v-for="item in tasks" :id="item" :key="item"></task-item-list>
-        </transition-group>
-      </draggable>
+      <task-item-list v-for="(item, key, index) in tasks" :task="item" :key="index" :id="key"></task-item-list>
     </div>
     <div class="sidebar">
       <event-calendar></event-calendar>
@@ -16,17 +12,36 @@
 <script>
 import EventCalendar from '../components/EventCalendar.vue'
 import TaskItemList from '../components/TaskItemList.vue'
-import draggable from 'vuedraggable'
+import firebase from 'firebase'
 
 export default {
   name: 'Currently',
   components: {
-    EventCalendar, TaskItemList, draggable
+    EventCalendar, TaskItemList
   },
   data () {
     return {
-      drag: false,
-      tasks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+      chooseDate: { day: new Date().getDate(), month: new Date().getMonth(), year: new Date().getFullYear() },
+      tasks: {}
+    }
+  },
+  created () {
+    this.getTasks(this.chooseDate)
+    this.$eventStore.$on('getTasks', this.getTasks)
+  },
+  beforeDestroy () {
+    this.$eventStore.$off('getTasks')
+  },
+  methods: {
+    getTasks (dateObj) {      
+      this.chooseDate = dateObj
+      const { day, month, year } = dateObj
+      const date = `${day}${month}${year}`
+      const firebaseTask = firebase.database().ref(`tasks/${date}`)
+      firebaseTask.orderByKey().on('value', (snapshot) => {
+        this.tasks = snapshot.val()
+      })
+      console.log('this.tasks = ', this.tasks)
     }
   }
 }

@@ -2,12 +2,11 @@
   <div class="task-item" :style="{ border: check ? `2px solid #00B5AC` : `1px solid #BDBDBD` }">    
     <div class="task-content">
       <p class="data" :style="{ color: check ? '#989898' : '#494949'}">23.05.1979</p>
-      <p class="task-description" @click="goToPath(id)" 
-                                  :style="{ textDecoration: check ? 'line-through' : 'none', color: check ? '#989898' : '#494949'}">
-                                  Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
-                                  Adipisicing aliquip id nulla id nisi qui ad adipisicing. 
-                                  Veniam deserunt officia sint fugiat occaecat veniam nulla nulla dolore. 
-                                  Adipisicing aliquip id nulla id ... </p>
+      <p class="task-description" 
+         @click="goToPath(id)" 
+         v-html="task.content"
+         :style="{ textDecoration: check ? 'line-through' : 'none', color: check ? '#989898' : '#494949'}">
+      </p>
     </div>
     <div class="task-options">      
       <input type="checkbox" :id="id" @click="onCheckedClick()" :checked="check"/>
@@ -20,7 +19,8 @@
 export default {
   name: 'TaskItem',
   props: {
-    id: Number 
+    id: String,
+    task: Object 
   },
   data () {
     return {
@@ -55,8 +55,6 @@ export default {
       cursor pointer
       text-decoration none
       transition-duration .5s
-      &:hover 
-        color $second-color 
     .data
       font-size 9px  
       line-height 1px     
