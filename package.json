@@ -56,7 +56,6 @@
     }
   },
   "dependencies": {
-    "axios": "^0.16.1",
     "electron-updater": "^2.17.6",
     "firebase": "^4.8.1",
     "vue": "^2.3.3",

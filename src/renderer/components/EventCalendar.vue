@@ -127,7 +127,12 @@ export default {
       this.daysArr.forEach(day => {
         day.choose = false
       })
-      if (item.status) item.choose = true
+      if (item.status) {
+        item.choose = true
+        const data = `${item.day}${this.dateObj.getMonth() + 1}${this.dateObj.getFullYear()}`
+        this.$eventStore.$emit('getTasks', data)        
+      }
+
     }
   }
 }

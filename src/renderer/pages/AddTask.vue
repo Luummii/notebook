@@ -30,13 +30,28 @@ export default {
       tasks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
     }
   },
+  created () {
+    this.$eventStore.$on('getTasks', this.getTasks)
+  },
+  beforeDestroy () {
+    this.$eventStore.$off('getTasks')
+  },
   methods: {
+    getTasks (data) {
+      console.log('data = ', data)
+      const firebaseTask = firebase.database().ref(`tasks/${data}`)
+      firebaseTask.orderByValue().on('value', (snapshot) => {
+        console.log(snapshot.val())
+      })
+    },
     createTask () {
-      const firebaseLoger = firebase.database().ref(`search_ingredients`)
-      const loger = firebaseLoger.push()
-      loger.set({
-        'user_id': `test`,
-        'selected_ingredients': 'ingredients'
+      const day = 31
+      const month = 1
+      const year = 2018
+      const hour = 14
+      const firebaseTask = firebase.database().ref(`tasks/${day}${month}${year}/${hour}`)
+      firebaseTask.set({
+        'content': this.content
       })
     }
   }
@@ -53,7 +68,7 @@ export default {
     margin-top $margin
     margin-left $margin
     #editor
-      height 250px
+      height 300px
     .create-task-button
       float right
       margin-top 10px
