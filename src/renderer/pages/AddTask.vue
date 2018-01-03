@@ -72,15 +72,17 @@ export default {
     createTask () {
       const { day, month, year } = this.chooseDate
       const hour = this.hoursTask
+      this.hoursTask = []
       console.log('day = ', day, 'month = ', month, 'year = ', year, 'hour = ', hour)
-      for (let i = 0; i < this.hoursTask.length; i++) {
-        const firebaseTask = firebase.database().ref(`tasks/${day}${month}${year}/${this.hoursTask[i]}`)
+      for (let i = 0; i < hour.length; i++) {
+        const firebaseTask = firebase.database().ref(`tasks/${day}${month}${year}/${hour[i]}`)
         firebaseTask.set({
           'content': this.content,
           'close': false,
-          'path': `tasks/${day}${month}${year}/${this.hoursTask[i]}`
+          'path': `tasks/${day}${month}${year}/${hour[i]}`
         })
-      }     
+      }
+      this.content = ''     
     }
   }
 }
