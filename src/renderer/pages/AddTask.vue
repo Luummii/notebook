@@ -77,7 +77,8 @@ export default {
         const firebaseTask = firebase.database().ref(`tasks/${day}${month}${year}/${this.hoursTask[i]}`)
         firebaseTask.set({
           'content': this.content,
-          'state': 'open'
+          'close': false,
+          'path': `tasks/${day}${month}${year}/${this.hoursTask[i]}`
         })
       }     
     }

@@ -1,36 +1,40 @@
 <template lang="html">
-  <div class="task-item" :style="{ border: check ? `2px solid #00B5AC` : `1px solid #BDBDBD` }">    
+  <div class="task-item" :style="{ border: task.close ? `2px solid #00B5AC` : `1px solid #BDBDBD` }">    
     <div class="task-content">
-      <p class="data" :style="{ color: check ? '#989898' : '#494949'}">23.05.1979</p>
+      <p class="data" :style="{ color: task.close ? '#989898' : '#494949'}">23.05.1979</p>
       <p class="task-description" 
          @click="goToPath(id)" 
          v-html="task.content"
-         :style="{ textDecoration: check ? 'line-through' : 'none', color: check ? '#989898' : '#494949'}">
+         :style="{ textDecoration: task.close ? 'line-through' : 'none', color: task.close ? '#989898' : '#494949'}">
       </p>
     </div>
     <div class="task-options">      
-      <input type="checkbox" :id="id" @click="onCheckedClick()" :checked="check"/>
+      <input type="checkbox" :id="id" @click="onCheckedClick()" :checked="task.close"/>
       <label :for="id"><span></span></label>      
     </div>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'TaskItem',
   props: {
-    id: String,
+    id: Number,
     task: Object 
   },
   data () {
     return {
-      textDecoration: 'none',
-      check: false
+      textDecoration: 'none'
     }
   },
   methods: {
-    onCheckedClick () {
-      this.check = !this.check      
+    onCheckedClick () { 
+      const firebaseTask = firebase.database().ref(this.task.path)
+      firebaseTask.update({        
+        'close': !this.task.close
+      })     
     }
   }
 }

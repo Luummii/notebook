@@ -1,6 +1,6 @@
 # notebook v1.0.0
 
-> The notebook is desktop app for notes
+> The notebook is desktop app for notes (electron)
 
 #### Build Setup
 
