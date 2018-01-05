@@ -41,7 +41,6 @@ export default {
       firebaseTask.orderByKey().on('value', (snapshot) => {
         this.tasks = snapshot.val()
       })
-      console.log('this.tasks = ', this.tasks)
     }
   }
 }
