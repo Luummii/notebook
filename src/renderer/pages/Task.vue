@@ -1,9 +1,6 @@
 <template lang="html">
   <div class="task">
-    <div class="content">
-      {{ id }}
-      <!-- <div v-html="getQuestion.content_question"></div> Может понадобится для вывода записей из реактора-->
-    </div>
+    <div class="content" v-html="content"></div>
     <div class="sidebar">
       
     </div>    
@@ -11,13 +8,21 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 
 export default {
   name: 'Task',
   data () {
     return {
-      id: this.$route.params.id
+      path: this.$route.query.path,
+      content: ''
     }
+  },
+  created () {
+    const firebaseTask = firebase.database().ref(`${this.path}`)
+    firebaseTask.orderByKey().on('value', (snapshot) => {
+      this.content = snapshot.val().content
+    })
   }
 }
 </script>

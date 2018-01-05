@@ -15,9 +15,9 @@ Vue.prototype.$eventStore = new Vue()
 
 Vue.mixin({
   methods: {
-    goToPath (id) {
+    goToPath (id, path) {
       console.log(id)
-      router.push({ path: '/Task/' + id })         
+      router.push({ path: '/Task/' + id, query: { path: path } })         
     }
   }
 })

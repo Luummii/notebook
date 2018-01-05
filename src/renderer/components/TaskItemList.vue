@@ -3,7 +3,7 @@
     <div class="task-content">
       <p class="data" :style="{ color: task.close ? '#989898' : '#494949'}">23.05.1979</p>
       <p class="task-description" 
-         @click="goToPath(id)" 
+         @click="goToPath(id, task.path)" 
          v-html="task.content"
          :style="{ textDecoration: task.close ? 'line-through' : 'none', color: task.close ? '#989898' : '#494949'}">
       </p>
